@@ -55,7 +55,72 @@
                 <!-- Select Toppings -->
                  <fieldset>
                     <legend>Select Toppings</legend>
+                    <label for="pepperoni">
+                        <input type="checkbox" id="pepperoni" name="toppings[]" value="pepperoni">
+                        Pepperoni
+                    </label>
+                    <label for="salami">
+                        <input type="checkbox" id="salami" name="toppings[]" value="salami">
+                        Salami
+                    </label>
+                    <label for="sausage">
+                        <input type="checkbox" id="sausage" name="toppings[]" value="sausage">
+                        Italian Sausage
+                    </label>
+                    <label for="ham">
+                        <input type="checkbox" id="ham" name="toppings[]" value="ham">
+                        Ham
+                    </label>
+                    <label for="bacon">
+                        <input type="checkbox" id="bacon" name="toppings[]" value="bacon">
+                        Bacon
+                    </label>
+                    <label for="olive">
+                        <input type="checkbox" id="olive" name="toppings[]" value="olive">
+                        Black Olives
+                    </label>
+                    <label for="mushroom">
+                        <input type="checkbox" id="mushroom" name="toppings[]" value="mushroom">
+                        Mushrooms
+                    </label>
+                    <label for="pepper">
+                        <input type="checkbox" id="pepper" name="toppings[]" value="pepper">
+                        Roasted Bell Peppers
+                    </label>
+                    <label for="onion">
+                        <input type="checkbox" id="onion" name="toppings[]" value="onion">
+                        Red Onion
+                    </label>
+                    <label for="corn">
+                        <input type="checkbox" id="corn" name="toppings[]" value="corn">
+                        Loose Corn
+                    </label>
+                    <label for="pineapple">
+                        <input type="checkbox" id="pineapple" name="toppings[]" value="pineapple">
+                        Pineapple
+                    </label>
+                    <label for="garlic">
+                        <input type="checkbox" id="garlic" name="toppings[]" value="garlic">
+                        Roasted Garlic
+                    </label>
                 </fieldset>
+
+                <!-- Pizza Size -->
+                <fieldset>
+                    <legend>Select Pizza Size</legend>
+                    <label for="size">
+                        <select type="select" id="size" name="size">
+                            <option value="none">-- Select a Size --</option>
+                            <option value="small">Small 10"</option>
+                            <option value="medium">Medium 12"</option>
+                            <option value="large">Large 14"</option>
+                        </select>
+                    </label>
+                </fieldset>
+
+                <label for="comment">Comments</label>
+                <textarea rows="5" id="comment" name="comment"></textarea>
+
                 <!-- Order Button -->
                  <button type="submit" id="order-button">Place Order</button>
             </form>
