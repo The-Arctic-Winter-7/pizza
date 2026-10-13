@@ -83,3 +83,8 @@ label {
 textarea {
     resize: vertical;
 }
+
+.err {
+    color: red;
+    display: none;
+}

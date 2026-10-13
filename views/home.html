@@ -6,6 +6,9 @@
         <!-- Stylesheet -->
         <link rel="Stylesheet" href="styles/pizza-styles.css">
 
+        <!-- JavaScript -->
+        <script src="scripts/pizza.js" defer></script>
+
         <!-- Favicon -->
         <link rel="icon" href="images/pizza-favicon.png">
 
@@ -29,14 +32,17 @@
                     <!-- First Name -->
                     <label for="first-name">First Name:</label>
                     <input type="text" id="first-name" name="first-name">
+                    <span class="err" id="err-fname">First name is required</span>
 
                     <!-- Last Name -->
                     <label for="last-name">Last Name:</label>
                     <input type="text" id="last-name" name="last-name">
+                    <span class="err" id="err-lname">Last name is required</span>
 
                     <!-- Email Address -->
                     <label for="email">Email Address:</label>
                     <input type="email" id="email" name="email">
+                    <span class="err" id="err-email">Email is required</span>
                 </fieldset>
 
                 <!-- Select Pickup or Delivery -->
