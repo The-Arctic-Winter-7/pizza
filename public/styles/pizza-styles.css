@@ -2,8 +2,14 @@
     box-sizing: border-box;
 }
 
+:root {
+    --primary-color: green;
+    --secondary-color: darkgreen;
+    --background-color: firebrick;
+}
+
 body {
-    background-color: firebrick;
+    background-color: var(--background-color);
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
@@ -28,7 +34,7 @@ body {
 
 #header h1 {
     font-weight: 600;
-    color: darkgreen;
+    color: var(--primary-color);
     font-size: 3.5rem;
 }
 
@@ -42,27 +48,16 @@ body {
     font-size: 1.25rem;
 }
 
-#contact-button {
-    border: none;
-    background-color: darkgreen;
-    border-color: darkgreen;
-    padding: .5rem .75rem;
-    border-radius: .25rem;
-    text-decoration: none;
-    color: white;
-    font-size: 1rem;
-}
-
 input[type="text"], input[type="email"], select, textarea {
     width: 100%;
-    border: 2px solid green;
+    border: 2px solid var(--primary-color);
     border-radius: .25em;
     margin: 0rem 0rem 1rem 0rem;
     padding: .75rem;
 }
 
 legend {
-    color: darkgreen;
+    color: var(--primary-color);
     font-variant: small-caps;
     font-size: 1.5rem;
     padding-left: 1rem;
@@ -70,7 +65,7 @@ legend {
 }
 
 fieldset {
-    border: 2px solid green;
+    border: 2px solid var(--primary-color);
     padding: 1rem;
     margin-bottom: 1.25rem;
 }
@@ -87,4 +82,19 @@ textarea {
 .err {
     color: red;
     display: none;
+}
+
+.nav-button {
+    border: none;
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    padding: .5rem .75rem;
+    border-radius: .25rem;
+    text-decoration: none;
+    color: white;
+    font-size: 1rem;
+}
+
+.nav-button:hover {
+    background-color: var(--secondary-color);
 }

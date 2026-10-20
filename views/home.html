@@ -23,20 +23,20 @@
                 <h2>Serving GRC students for 50 years!</h2>
                 <hr>
                 <p>We make the best pizza ever! Visit us today!</p>
-                <a id="contact-button" href="#" role="button">Contact Us</a>
+                <a class="nav-button" id="contact-button" href="/contact-us" role="button">Contact Us</a>
             </div>
-            <form id="pizza-form" action="#" method="get">      
+            <form id="pizza-form" action="/submit-order" method="post">      
                 <!-- Contact Info -->
                 <fieldset>
                     <legend>Contact Info</legend>
                     <!-- First Name -->
                     <label for="first-name">First Name:</label>
-                    <input type="text" id="first-name" name="first-name">
+                    <input type="text" id="first-name" name="fname">
                     <span class="err" id="err-fname">First name is required</span>
 
                     <!-- Last Name -->
                     <label for="last-name">Last Name:</label>
-                    <input type="text" id="last-name" name="last-name">
+                    <input type="text" id="last-name" name="lname">
                     <span class="err" id="err-lname">Last name is required</span>
 
                     <!-- Email Address -->
