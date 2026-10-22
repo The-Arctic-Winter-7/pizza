@@ -33,8 +33,11 @@ app.post('/submit-order', (req, res) => {
     const order = req.body;
     order['timestamp'] = new Date();
 
+    console.log(order);
+
     // Add orders to order array
     orders.push(order);
+    console.log(orders);
 
     res.sendFile(`${import.meta.dirname}/views/confirm.html`);
 });
@@ -47,6 +50,10 @@ app.get('/contact-us', (req, res) => {
 // Add a confirm order route to display an order confirmed view page
 app.get('/confirm-order', (req, res) => {
     res.sendFile(`${import.meta.dirname}/views/confirm.html`);
+});
+
+app.get('/admin', (req, res) => {
+    res.send(orders);
 });
 
 app.listen(PORT, () => {
