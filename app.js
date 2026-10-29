@@ -42,7 +42,7 @@ app.post('/submit-order', (req, res) => {
     orders.push(order);
     console.log(orders);
 
-    res.render('confirm');
+    res.render('confirm', { order });
 });
 
 // Add a contact route to display a contact view page
@@ -51,7 +51,7 @@ app.get('/contact-us', (req, res) => {
 });
 
 app.get('/admin', (req, res) => {
-    res.send(orders);
+    res.render('admin', { orders });
 });
 
 app.listen(PORT, () => {
