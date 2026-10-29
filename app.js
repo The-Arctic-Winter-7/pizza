@@ -16,15 +16,18 @@ app.use(express.static('public'));
 // Access form data through req.body
 app.use(express.urlencoded({ extended: true }));
 
+// Set view engine to EJS
+app.set('view engine', 'ejs');
+
 // Define a default route
 app.get('/', (req, res) => {
     // res.send('Welcome to Winter\'s Pizza'):
-    res.sendFile(`${import.meta.dirname}/views/home.html`);
+    res.render('home');
 });
 
 // Add a menu route to display a menu view page
 app.get('/pizza-menu', (req, res) => {
-    res.sendFile(`${import.meta.dirname}/views/menu.html`);
+    res.render('menu');
 });
 
 // Add a route to process a pizza order
@@ -39,17 +42,12 @@ app.post('/submit-order', (req, res) => {
     orders.push(order);
     console.log(orders);
 
-    res.sendFile(`${import.meta.dirname}/views/confirm.html`);
+    res.render('confirm');
 });
 
 // Add a contact route to display a contact view page
 app.get('/contact-us', (req, res) => {
-    res.sendFile(`${import.meta.dirname}/views/contact.html`);
-});
-
-// Add a confirm order route to display an order confirmed view page
-app.get('/confirm-order', (req, res) => {
-    res.sendFile(`${import.meta.dirname}/views/confirm.html`);
+    res.render('contact');
 });
 
 app.get('/admin', (req, res) => {
