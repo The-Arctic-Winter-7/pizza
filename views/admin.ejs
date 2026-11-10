@@ -5,36 +5,56 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Page</title>
+
+  <!-- Stylesheet -->
+  <link rel="Stylesheet" href="styles/pizza-styles.css">
+
+  <!-- JavaScript -->
+  <script src="scripts/pizza.js" defer></script>
+
+  <!-- Favicon -->
+  <link rel="icon" href="images/pizza-favicon.png">
+
+  <!-- Add DataTable Resources-->
+  <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+  <script src="https://cdn.datatables.net/3.1.4/js/dataTables.min.js"></script>
+  <link rel="Stylesheet" href="https://cdn.datatables.net/3.1.4/css/dataTables.dataTables.min.css">
+
 </head>
 
 <body>
-  <h1>Orders</h1>
-  <table id="order-table" class="display">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Toppings</th>
-        <th>Size</th>
-        <th>Method</th>
-        <th>Comment</th>
-        <th>Date/Time</th>
-      </tr>
-    </thead>
-    <% orders.forEach(order => { %>
-    <tbody>
-      <tr>
-        <td><%= order.fname %> <% order.lname %></td>
-        <td><%= order.email %></td>
-        <td><%= order.toppings %></td>
-        <td><%= order.size %></td>
-        <td><%= order.method %></td>
-        <td><%= order.comment %></td>
-        <td><%= order.timestamp.toLocaleString() %></td>
-      </tr>
-      <% }); %>
-    </tbody>
-  </table>
+  <div id="main">
+    <h1>Orders</h1>
+    <table id="order-table" class="display">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Toppings</th>
+          <th>Size</th>
+          <th>Method</th>
+          <th>Comment</th>
+          <th>Date/Time</th>
+        </tr>
+      </thead>
+      <% orders.forEach(order => { %>
+      <tbody>
+        <tr>
+          <td><%= order.fname %> <% order.lname %></td>
+          <td><%= order.email %></td>
+          <td><%= order.toppings %></td>
+          <td><%= order.size %></td>
+          <td><%= order.method %></td>
+          <td><%= order.comment %></td>
+          <td><%= order.timestamp.toLocaleString() %></td>
+        </tr>
+        <% }); %>
+      </tbody>
+    </table>
+    <script>
+        new DataTable('#order-table');
+    </script>
+  </div>
 </body>
 
 </html>
