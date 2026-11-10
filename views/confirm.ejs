@@ -17,15 +17,19 @@
 </head>
 
 <body>
-  <h1>Thank you for your order, <%= order.fname %>!</h1>
-  <h2>Order Summary</h2>
-  <p>Name: <%= order.fname %> <%= order.lname %></p>
-  <p>Email: <%= order.email %></p>
-  <p>Pickup or Delivery?: <%= order.method %></p>
-  <p>Toppings: <%= order.toppings %></p>
-  <p>Pizza Size: <%= order.size %></p>
-  <p>Comment: <%= order.comment %></p>
-  <p>Date and Time: <%= order.timestamp.toLocaleString() %></p>
+  <div id="main">
+    <div id="header">
+      <h1>Thank you for your order, <%= order.fname %>!</h1>
+    </div>
+    <h2>Order Summary</h2>
+    <p>Name: <%= order.fname %> <%= order.lname %></p>
+    <p>Email: <%= order.email %></p>
+    <p>Pickup or Delivery?: <%= order.method %></p>
+    <p>Toppings: <%= order.toppings %></p>
+    <p>Pizza Size: <%= order.size %></p>
+    <p>Comment: <%= order.comment %></p>
+    <p>Date and Time: <%= order.timestamp %></p>
+  </div>
 </body>
 
 </html>
