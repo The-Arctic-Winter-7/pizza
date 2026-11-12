@@ -9,7 +9,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-// Create a pool
+// Create a connection pool
 const pool = mysql2.createPool({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
@@ -37,17 +37,6 @@ app.use(express.urlencoded({ extended: true }));
 // Set view engine to EJS
 app.set('view engine', 'ejs');
 
-// Create a route to test database
-app.get('/db-test', async (req, res) => {
-    try {
-        const orders = await pool.query('SELECT * FROM orders');
-        res.send(orders[0]);
-    } catch (err) {
-        console.error('Database error: ', err);
-        res.status(500).send('Database error ocurred.');
-    }
-});
-
 // Define a default route
 app.get('/', (req, res) => {
     // res.send('Welcome to Winter\'s Pizza'):
@@ -61,9 +50,13 @@ app.get('/pizza-menu', (req, res) => {
 
 // Add a route to process a pizza order
 app.post('/submit-order', async (req, res) => {
+   
     // Create a JSON object to store order data
     const order = req.body;
-    console.log(order);
+    // console.log(order);
+
+    order.toppings = Array.isArray(order.toppings) ?
+        order.toppings.join(", ") : "";
 
     const sql = 'INSERT INTO orders (fname, lname, email, size, method, toppings, comment) VALUES(?, ?, ?, ?, ?, ?, ?)';
 
@@ -80,6 +73,10 @@ app.post('/submit-order', async (req, res) => {
 
     const [result] = await pool.execute(sql, params);
 
+    // Get the id from the newly inserted row
+    order.id = result.insertId;
+    console.log("A new row was insterted with ID " + order.id);
+
     res.render('confirm', { order });
 });
 
@@ -91,9 +88,8 @@ app.get('/contact-us', (req, res) => {
 // Add an admin route to display order data
 app.get('/admin', async (req, res) => {
     try {
-        const orders = await pool.query('SELECT * FROM orders');
-        console.log(orders[0]);
-        res.render('admin', { orders: orders[0] });
+        const [orders] = await pool.query('SELECT * FROM orders');
+        res.render('admin', { orders });
     } catch (err) {
         console.error('Database error: ', err);
         res.status(500).send('Database error ocurred.');

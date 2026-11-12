@@ -22,13 +22,14 @@
       <h1>Thank you for your order, <%= order.fname %>!</h1>
     </div>
     <h2>Order Summary</h2>
+    <p>Order ID: <%= order.id %></p>
     <p>Name: <%= order.fname %> <%= order.lname %></p>
     <p>Email: <%= order.email %></p>
     <p>Pickup or Delivery?: <%= order.method %></p>
     <p>Toppings: <%= order.toppings %></p>
     <p>Pizza Size: <%= order.size %></p>
     <p>Comment: <%= order.comment %></p>
-    <p>Date and Time: <%= order.timestamp %></p>
+    <p>Date and Time: <%= new Date().toLocaleDateString('en-US') %></p>
   </div>
 </body>
 
