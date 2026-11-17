@@ -7,6 +7,9 @@ import mysql2 from 'mysql2';
 // Import .env
 import dotenv from 'dotenv';
 
+// Import Express Seesion
+import session from 'express-session';
+
 dotenv.config();
 
 // Create a connection pool
@@ -20,6 +23,42 @@ const pool = mysql2.createPool({
 
 // Create an instance of an express application
 const app = express();
+
+/* ==================== SESSION MIDDLEWARE =====================
+ * A SESSION lets the server remember a user between requests.
+ * After this runs, every route can read and write req.session.
+ * 
+ * secret:            Used to sign the session cookie (from .env)
+ * resave:            false = don't re-save sessions that didn't change
+ * saveUninitialized: false = don't create a session until we sotre
+ *                    something in it (like loggedIn = true)
+ * cookie.maxAge:     How long the login lasts, in milliseconds
+ *                    (1000 ms * 60 sec * 60 minutes = 1 hour)
+ */
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: { maxAge: 1000 * 60 * 60 }
+}));
+
+/* ==================== requireLogin MIDDLEWARE ====================
+ * Middleware is a function that runs BETWEEN the request arriving
+ * and the route handler running. It receives three parameters:
+ *   req  - the request
+ *   res  - the response
+ *   next - a function that says "OK, continue to the route"
+ *
+ * If the user is logged in, we call next() to let them through.
+ * If not, we redirect them to the login page instead.
+ */
+function requireLogin(req, res, next) {
+    if (req.session.loggedIn) {
+        next();
+    } else {
+        res.redirect('/login');
+    }
+}
 
 // Define a port number for our server to listen on
 const PORT = 3000;
@@ -50,7 +89,7 @@ app.get('/pizza-menu', (req, res) => {
 
 // Add a route to process a pizza order
 app.post('/submit-order', async (req, res) => {
-   
+
     // Create a JSON object to store order data
     const order = req.body;
     // console.log(order);
@@ -85,8 +124,49 @@ app.get('/contact-us', (req, res) => {
     res.render('contact');
 });
 
+// Add a route for the login page
+// Display the login page - http://localhost:3000/login
+// We pass error: null because there is no error yet.
+// login.ejs checks "if (error)", so error must always be defined.
+app.get('/login', (req, res) => {
+    res.render('login', { error: null });
+});
+
+// Process the login form
+// This handles POST requests to /login (when the user submits the form)
+app.post('/login', (req, res) => {
+    // Get the values the user typed into the form
+    const username = req.body.username;
+    const password = req.body.password;
+
+    // Compare them to the username and password stored in .env
+    if (username === process.env.ADMIN_USER &&
+        password === process.env.ADMIN_PASSWORD) {
+
+        // Correct! Remember that this user is logged in
+        req.session.loggedIn = true;
+
+        // Send them to the admin page
+        res.redirect('/admin');
+    } else {
+        // Wrong username or password - show the form again with an error
+        // Note: we don't say WHICH one was wrong. That would give an
+        // attacker a hint (e.g., "the username is right, keep guessing").
+        res.render('login', { error: 'Invalid username or password.' });
+    }
+});
+
+// Log out - http://localhost:3000/logout
+// req.session.destroy() deletes the session from the server.
+// When it's finished, we send the user back to the login page.
+app.get('/logout', (req, res) => {
+    req.session.destroy(() => {
+        res.redirect('/login');
+    });
+});
+
 // Add an admin route to display order data
-app.get('/admin', async (req, res) => {
+app.get('/admin', requireLogin, async (req, res) => {
     try {
         const [orders] = await pool.query('SELECT * FROM orders');
         res.render('admin', { orders });
