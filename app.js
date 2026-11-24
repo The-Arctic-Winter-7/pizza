@@ -10,6 +10,9 @@ import dotenv from 'dotenv';
 // Import Express Seesion
 import session from 'express-session';
 
+// Import server-side validation function
+import { validateForm } from './validation.js';
+
 dotenv.config();
 
 // Create a connection pool
@@ -92,7 +95,15 @@ app.post('/submit-order', async (req, res) => {
 
     // Create a JSON object to store order data
     const order = req.body;
-    // console.log(order);
+    console.log(order);
+
+    // Validate the data on the *server*
+    const valid = validateForm(order);
+    if (!valid.isValid) {
+        console.log(valid);
+        res.render('home', { errors: valid.errors });
+        return;
+    }
 
     order.toppings = Array.isArray(order.toppings) ?
         order.toppings.join(", ") : "";

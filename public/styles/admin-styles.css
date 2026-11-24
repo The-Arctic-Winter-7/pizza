@@ -1,0 +1,67 @@
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: green;
+    --secondary-color: darkgreen;
+    --background-color: firebrick;
+}
+
+body {
+    background-color: var(--background-color);
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#main {
+    background-color: white;
+    max-width: 40%;
+    margin: 2rem auto;
+    padding: 2rem;
+    border-radius: 0.5rem;
+}
+
+h1 {
+    text-align: center;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+select,
+textarea {
+    width: 100%;
+    border: 2px solid var(--primary-color);
+    border-radius: .25em;
+    margin: 0rem 0rem 1rem 0rem;
+    padding: .75rem;
+}
+
+label {
+    display: block;
+    padding-bottom: 0.5rem;
+}
+
+.submit-button {
+    border: none;
+    width: 100%;
+    transition: background-color 0.2s ease;
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    padding: .5rem .75rem;
+    border-radius: .25rem;
+    text-decoration: none;
+    color: white;
+    font-size: 1rem;
+}
+
+.submit-button:hover {
+    cursor: pointer;
+    background-color: var(--secondary-color);
+}
+
+.login-error {
+    color: red;
+    font-weight: 700;
+}
